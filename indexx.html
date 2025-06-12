@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Meu Amor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #2b0b0e; /* vinho escuro */
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-top: 1em;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 100vw;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 300vw; /* 100vw * número de slides */
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100vw;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 1.5em;
+      border: none;
+      z-index: 1;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .text-section {
+      margin: 2em 1em;
+      font-size: 1.2em;
+    }
+
+    #btnPresente, #btnMusica {
+      background-color: #800020;
+      color: white;
+      padding: 1em 2em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 1em;
+    }
+
+    #btnPresente:hover, #btnMusica:hover {
+      background-color: #a83242;
+    }
+
+    #surpresa {
+      margin-top: 2em;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      animation: aparecer 3s ease forwards;
+      animation-delay: 2s;
+    }
+
+    #surpresa.mostrar {
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    @keyframes aparecer {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.5em; }
+      .text-section { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Para o Amor da Minha Vida</h1>
+
+  <div class="carousel-container">
+    <div class="slides" id="slides">
+      <img src="D:\Dowloads\ela\1.jpg" alt="Foto 1">
+      <img src="D:\Dowloads\ela\2.jpg" alt="Foto 2">
+      <img src="D:\Dowloads\ela\4.jpg" alt="Foto 3">
+      <img src="D:\Dowloads\ela\5.jpg" alt="Foto 3">
+      <img src="D:\Dowloads\ela\6.jpg" alt="Foto 3">
+      <img src="D:\Dowloads\ela\7.jpg" alt="Foto 3">
+    </div>
+    <button class="nav prev" onclick="mudarSlide(-1)">&#10094;</button>
+    <button class="nav next" onclick="mudarSlide(1)">&#10095;</button>
+  </div>
+
+  <div class="text-section">
+    <p>Amor, cada dia ao seu lado eu apenas tenho mais certeza que você é a pessoa certa,
+    <br>cada momento com vc é especial, vc me deu a oportunidade de sentir o sentimento de amar de verdade, e nunca mais quero perder.<br>
+    Eu acho que eu não consigo demonstrar o quanto eu te amo, e fiz essa pequena surpresa, com o meu pequeno conhecimento. Te amo muito.</p>
+  </div>
+
+  <button id="btnMusica" onclick="tocarMusica()">Musica para entrar no clima 🎵</button>
+  <audio id="musica">
+    <source src="D:\Dowloads\ela\musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <button id="btnPresente" onclick="mostrarPresente()">Clique aqui ❤️</button>
+
+  <div id="surpresa">
+    <p>Namora comigo? 💍</p>
+    <img src="D:\Dowloads\ela\alianca.jpg" alt="Aliança" style="max-width: 80%; margin-top: 2em;">
+  </div>
+
+  <script>
+    let index = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+
+    function mostrarSlide(n) {
+      index = (n + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}vw)`;
+    }
+
+    function mudarSlide(n) {
+      mostrarSlide(index + n);
+    }
+
+    function autoPlay() {
+      mudarSlide(1);
+    }
+
+    setInterval(autoPlay, 5000); // troca a cada 5 segundos
+
+    function mostrarPresente() {
+      document.getElementById('surpresa').classList.add('mostrar');
+    }
+
+    function tocarMusica() {
+      const audio = document.getElementById('musica');
+      audio.play();
+    }
+  </script>
+
+</body>
+</html>
